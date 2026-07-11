@@ -1,22 +1,36 @@
-# 🛠️ STM32 Embedded Systems Developer Journal
+# STM32 Embedded Software Engineering Journal
 
-Welcome to my personal learning journal! In this repository, I document my journey into the world of embedded systems using the STM32 Discovery board. My goal is to understand the core physics, hardware architecture, and code logic of every single component from scratch.
+This repository serves as my professional engineering journal, documenting a structured, step-by-step development journey into ARM Cortex-M microcontrollers using the STM32 platform. 
 
-## 📚 Table of Contents (Step-by-Step Projects)
-
-### 🔴 Phase 1: Basic Input/Output (GPIO) Fundamentals
-* **[Step 1: On-Board Green LED Blinking (Blink)](./01_Dahili_LED_Blink)**
-  * *Concepts Learned:* `HAL_GPIO_WritePin`, `HAL_Delay`, CPU execution speed vs. human eye perception limits.
-* **[Step 2: LED Control via Toggle Logic](./02_LED_Toggle_Mantigi)**
-  * *Concepts Learned:* Code optimization and minimizing instructions using `HAL_GPIO_TogglePin`.
-* **[Step 3: Momentary Pushbutton LED Control](./03_Anlik_Buton_LED)**
-  * *Concepts Learned:* `HAL_GPIO_ReadPin`, understanding current flow paths in a Pull-Up resistor circuit configuration.
-
-### 🟡 Phase 2: Advanced Peripheral Applications & Debugging
-* **[Step 4: Latching (Toggle) Button & SWV Debugging](./04_Kalici_Buton_SWV_Debug)**
-  * *Concepts Learned:* Redirecting `printf` via the `_write` function to the SWV ITM Data Console, mechanical switch debouncing, and locking the program flow using `while` loops.
-* **[Step 5: Knight Rider (Kara Şimşek) Speed Adjustment via Button](./05_Kara_Simsek_Hiz_Ayari)**
-  * *Concepts Learned:* Variable-based `HAL_Delay` modification and building state-dependent algorithms.
+The core focus is on mastering peripheral configurations, hardware-software interfacing, and protocol implementations through practical, verified code and real-time physical testing.
 
 ---
-*Each project folder contains the respective CubeIDE source files (`main.c`), detailed breadboard circuit schematics, and my engineering notes explaining the inner workings.*
+
+## Technical Roadmap & Completed Modules
+
+### Phase 1: GPIO & Fundamental Peripherals
+* **Step 1: On-Board LED Drive Implementation (Blink)**
+  * Core configuration of GPIO outputs, CPU loop cycles, and basic timing/delay abstractions.
+* **Step 2: Optimized LED Scanning via Bit-Shifting Operations**
+  * Advanced register addressing using bitwise operations `(1 << i)` to reduce software instructions and optimize loop boundaries.
+* **Step 3: External Interrupts (EXTI) & Hardware Interfacing**
+  * Asynchronous event handling, push-button interface configuration, and software-based debouncing methodologies.
+
+### Phase 2: Analog-to-Digital Interfacing & Advanced Timers
+* **Step 4: Hardware Timers & Precise Interrupt Service Routines (ISR)**
+  * Configuring internal clock prescalers and counter registers for time-critical embedded tasks.
+* **Step 5: Pulse Width Modulation (PWM) & Signal Generation**
+  * Duty cycle calculations and capture/compare register manipulation for dimming and actuator controls.
+* **Step 6: Analog Interfacing (ADC & DAC)**
+  * Voltage sampling, data conversion sequences, resolution tuning, and generating analog signals from digital inputs.
+
+### Phase 3: Communication Protocols & Data Transfer
+* **Step 7: Universal Asynchronous Receiver-Transmitter (UART/USART)**
+  * Establishing serial data transmission pipelines between the microcontroller and external terminals.
+* **Step 8: Synchronous Serial Protocols (I2C & SPI)**
+  * Master-Slave architecture implementation, bus timing analysis, and reading/writing to external sensors and displays.
+* **Step 9: Direct Memory Access (DMA) Integration**
+  * Offloading peripheral data transfer operations from the CPU to maximize execution efficiency.
+
+---
+*Note: Each directory contains fully isolated, compilation-ready C source modules, clock configurations, and corresponding physical hardware verification clips.*
