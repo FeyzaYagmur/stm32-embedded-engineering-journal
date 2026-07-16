@@ -31,4 +31,4 @@ Explores the communication pipelines of modern embedded systems. This includes e
 Dedicated to building robust, fail-safe industrial embedded applications. This covers configuring Independent (IWDG) and Window (WWDG) Watchdog timers to reset the system during software locks. It also explores configuring the low-power modes (Sleep, Stop, Standby) of the STM32 Power Control (PWR) peripheral and managing Backup Registers to preserve critical state parameters during power failures.
 
 ---
-*Developed with ❤️ by Feyza Yağmur Arat. Proud Electrical-Electronics Engineering Student at Mersin University.*
+*Developed with by Feyza Yağmur Arat. Proud Electrical-Electronics Engineering Student at Mersin University.*
