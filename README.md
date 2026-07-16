@@ -1,58 +1,34 @@
-# STM32F407 Discovery Development Journal
+# STM32F407 Embedded Systems Engineering Journal
 
-This repository serves as my professional engineering journal, documenting a structured, step-by-step development journey into ARM Cortex-M microcontrollers using the STM32 platform (specifically targetting the STM32F407VG Discovery). 
+This repository serves as my professional engineering journal, documenting my structured, theoretical and practical development journey into ARM Cortex-M microcontrollers using the STM32 platform (specifically targeting the STM32F407VG Discovery board).
 
-The core focus is on mastering peripheral configurations, hardware-software interfacing, and protocol implementations through **HAL (Hardware Abstraction Layer)** libraries, verified with real-time physical testing and simulation.
-
----
-
-## 🗺️ Technical Roadmap & Completed Modules
-
-### Phase 1: GPIO, Debugging & Hardware Basics
-* **Step 1: On-Board LED Drive Implementation (Blink)**
-    * Core configuration of GPIO outputs, CPU loop cycles, and basic timing/delay abstractions using HAL libraries.
-* **Step 2: External Interrupts (EXTI) & Push-Button Interfacing**
-    * Asynchronous event handling, EXTI line configuration, and software-based debouncing methodologies.
-* **Step 3: Seven-Segment Displays & Keil IDE Debugging**
-    * Utilizing Keil uVision debugger (breakpoints, watch windows) and driving multi-digit Seven-Segment Displays.
-
-### Phase 2: Actuators, Drivers & Analog Interfacing
-* **Step 4: Transistor Switching & DC Motor Control**
-    * Understanding transistor saturation, flyback diode protection, and basic DC motor driving.
-* **Step 5: Dedicated Motor Drivers (L293D & ULN2003AN)**
-    * Interfacing with **L293D H-Bridge** for DC motor bi-directional control and **ULN2003AN Darlington pair** for Step Motor sequence generation.
-* **Step 6: Analog-to-Digital Interfacing (ADC & NTC Thermistors)**
-    * Voltage sampling, resolution tuning, and converting raw ADC data to physical temperature values using **NTC Thermistors**.
-* **Step 7: Digital-to-Analog Conversion (DAC)**
-    * Generating analog signals (sine, triangle, sawtooth waves) from digital inputs.
-
-### Phase 3: Advanced Timers, Signal Generation & Sensors
-* **Step 8: Hardware Timers & Precise Interrupts (ISR)**
-    * Configuring internal clock prescalers and counter registers for time-critical embedded tasks.
-* **Step 9: Pulse Width Modulation (PWM)**
-    * Duty cycle calculations and capture/compare register manipulation for dimming and motor speed control.
-* **Step 10: Ultrasonic Distance Sensing (HC-SR04)**
-    * Using Input Capture mode of Timers to measure echo pulse-width and calculate real-time distance.
-
-### Phase 4: Communication Protocols & Data Visualization
-* **Step 11: UART/USART Serial Communications & Bluetooth (HC-05)**
-    * Establishing serial data pipelines between the MCU and PC. Wireless control implementation via HC-05 Bluetooth module.
-* **Step 12: Real-Time Data Visualization (MATLAB Integration)**
-    * Streaming real-time sensor data over UART to MATLAB to generate real-time graphical plots.
-* **Step 13: Synchronous Serial Protocols (I2C & SPI)**
-    * Master-Slave architecture, bus timing analysis, and reading/writing to external EEPROMs or sensors.
-* **Step 14: Direct Memory Access (DMA) Integration**
-    * Offloading high-speed peripheral data transfer operations (ADC to RAM / Memory to UART) from the CPU.
-
-### Phase 5: System Reliability, Power & Low-Level Control
-* **Step 15: Watchdog Timers (IWDG & WWDG)**
-    * Implementing Independent and Window Watchdog timers to prevent system lockups in mission-critical loops.
-* **Step 16: Power Control (PWR) & Backup Registers**
-    * Configuring low-power modes (Sleep, Stop, Standby) and utilizing Backup Data Registers to preserve critical state data during power loss.
+The core focus of this study is mastering hardware-software interfacing, peripheral configurations, and bare-metal microcontroller programming concepts using the STM32Cube HAL framework.
 
 ---
 
-## 📚 Academic & Reference Materials
-* **Datasheet & Reference Manual Analysis:** A dedicated guide on how to read and navigate the STM32F407VG datasheet and RM0090 Reference Manual.
-* **University Coursework & Exam Prep:** Selected midterm/final practice questions, laboratory assignments, and conceptual Q&A sections.
-* **Further Reading & Resources:** Curated list of recommended textbooks, online courses, and technical websites for advanced ARM development.
+## 📺 Project Hardware Demonstrations
+All physical hardware verifications, laboratory measurements, and running application videos are stored in a dedicated Google Drive folder. You can access the entire video library directly through the link below:
+
+🔗 [**Click Here to Access the STM32 Project Videos Folder**] https://drive.google.com/drive/folders/1QEF27VpM2UhSrB0GhmENcJqSesYxxM8_?usp=sharing
+
+---
+
+## 📚 Theoretical & Practical Curriculum Overview
+
+### Phase 1: Microcontroller Basics, GPIO & Debugging
+In this foundational phase, the study covers the architecture of general-purpose inputs and outputs (GPIO), configuring peripheral clocks, and understanding register-level behaviors. It also focuses on real-time debugging operations using Keil uVision and ST-LINK, utilizing tools like Serial Wire Viewer (SWV) to track internal variables, state changes, and hardware-software synchronization without halting the CPU.
+
+### Phase 2: Actuators, Motor Drivers & Analog Interfacing
+This phase bridges the gap between digital control and analog/physical hardware. It involves learning transistor switching principles, flyback diode protection, and interfacing with dedicated drivers like the **L293D H-Bridge** and **ULN2003AN Darlington pair** to control DC and stepper motors. On the analog side, it covers analog-to-digital conversion (ADC) parameters, sampling rates, and temperature measurement calculations using NTC thermistors, as well as digital-to-analog conversion (DAC) for waveform generation.
+
+### Phase 3: Hardware Timers, PWM & Sensors
+Focuses on the internal timing engines of the ARM Cortex-M core. This covers setting up hardware timer prescalers, counter registers, and period values to trigger precise internal interrupts (ISRs). It also includes implementing Pulse Width Modulation (PWM) for motor speed and LED brightness control, alongside reading precise echo timings from sensors like the HC-SR04 ultrasonic distance sensor using input capture modes.
+
+### Phase 4: Serial Communication Protocols & DMA
+Explores the communication pipelines of modern embedded systems. This includes establishing asynchronous pipelines via UART/USART (including wireless communication over HC-05 Bluetooth), plotting real-time telemetry data directly in MATLAB, and mastering synchronous serial buses like I2C and SPI. Additionally, Direct Memory Access (DMA) is explored to offload high-speed data streams directly to memory without loading the CPU.
+
+### Phase 5: System Reliability & Power Management
+Dedicated to building robust, fail-safe industrial embedded applications. This covers configuring Independent (IWDG) and Window (WWDG) Watchdog timers to reset the system during software locks. It also explores configuring the low-power modes (Sleep, Stop, Standby) of the STM32 Power Control (PWR) peripheral and managing Backup Registers to preserve critical state parameters during power failures.
+
+---
+*Developed with ❤️ by Feyza Yağmur Arat. Proud Electrical-Electronics Engineering Student at Mersin University.*
