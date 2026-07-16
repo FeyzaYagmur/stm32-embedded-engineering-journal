@@ -62,7 +62,3 @@ int main(void)
     /* USER CODE END WHILE */
   }
 }
-
-The physical hardware execution and test output for this project can be viewed inside the main repository video library.
-
-https://drive.google.com/drive/folders/1QEF27VpM2UhSrB0GhmENcJqSesYxxM8_?usp=sharing
