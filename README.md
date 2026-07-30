@@ -1,34 +1,45 @@
-# STM32F407 Embedded Systems Engineering Journal
+# 🚀 STM32F407 Gömülü Sistemler Mühendisliği Günlüğü
 
-This repository serves as my professional engineering journal, documenting my structured, theoretical and practical development journey into ARM Cortex-M microcontrollers using the STM32 platform (specifically targeting the STM32F407VG Discovery board).
+Bu depo; **STM32F407VG Discovery** kartı üzerinde **STM32CubeIDE** geliştirme ortamı ve **STM32Cube HAL** kütüphanesini kullanarak geliştirdiğim gömülü sistem projelerini belgeleyen kişisel mühendislik günlüğüdür.
 
-The core focus of this study is mastering hardware-software interfacing, peripheral configurations, and bare-metal microcontroller programming concepts using the STM32Cube HAL framework.
-
----
-
-## 📺 Project Hardware Demonstrations
-All physical hardware verifications, laboratory measurements, and running application videos are stored in a dedicated Google Drive folder. You can access the entire video library directly through the link below:
-
-🔗 [**Click Here to Access the STM32 Project Videos Folder**] https://drive.google.com/drive/folders/1QEF27VpM2UhSrB0GhmENcJqSesYxxM8_?usp=sharing
+Projeler modüler olarak geliştirilmekte ve tamamlandıkça depoya eklenmektedir.
 
 ---
 
-## 📚 Theoretical & Practical Curriculum Overview
+## 📺 Donanım Uygulamaları & Video Kütüphanesi
 
-### Phase 1: Microcontroller Basics, GPIO & Debugging
-In this foundational phase, the study covers the architecture of general-purpose inputs and outputs (GPIO), configuring peripheral clocks, and understanding register-level behaviors. It also focuses on real-time debugging operations using Keil uVision and ST-LINK, utilizing tools like Serial Wire Viewer (SWV) to track internal variables, state changes, and hardware-software synchronization without halting the CPU.
+Tüm projelerin fiziksel donanım üzerindeki çalışma videoları, osiloskop/ölçüm sonuçları ve devre görselleri Google Drive klasöründe saklanmaktadır:
 
-### Phase 2: Actuators, Motor Drivers & Analog Interfacing
-This phase bridges the gap between digital control and analog/physical hardware. It involves learning transistor switching principles, flyback diode protection, and interfacing with dedicated drivers like the **L293D H-Bridge** and **ULN2003AN Darlington pair** to control DC and stepper motors. On the analog side, it covers analog-to-digital conversion (ADC) parameters, sampling rates, and temperature measurement calculations using NTC thermistors, as well as digital-to-analog conversion (DAC) for waveform generation.
-
-### Phase 3: Hardware Timers, PWM & Sensors
-Focuses on the internal timing engines of the ARM Cortex-M core. This covers setting up hardware timer prescalers, counter registers, and period values to trigger precise internal interrupts (ISRs). It also includes implementing Pulse Width Modulation (PWM) for motor speed and LED brightness control, alongside reading precise echo timings from sensors like the HC-SR04 ultrasonic distance sensor using input capture modes.
-
-### Phase 4: Serial Communication Protocols & DMA
-Explores the communication pipelines of modern embedded systems. This includes establishing asynchronous pipelines via UART/USART (including wireless communication over HC-05 Bluetooth), plotting real-time telemetry data directly in MATLAB, and mastering synchronous serial buses like I2C and SPI. Additionally, Direct Memory Access (DMA) is explored to offload high-speed data streams directly to memory without loading the CPU.
-
-### Phase 5: System Reliability & Power Management
-Dedicated to building robust, fail-safe industrial embedded applications. This covers configuring Independent (IWDG) and Window (WWDG) Watchdog timers to reset the system during software locks. It also explores configuring the low-power modes (Sleep, Stop, Standby) of the STM32 Power Control (PWR) peripheral and managing Backup Registers to preserve critical state parameters during power failures.
+🔗 **[STM32 Proje Videoları Klasörüne Erişmek İçin Buraya Tıklayın](https://drive.google.com/drive/folders/1QEF27VpM2UhSrB0GhmENcJqSesYxxM8_?usp=sharing)**
 
 ---
-*Developed with by Feyza Yağmur Arat. Electrical-Electronics Engineering Student at Mersin University.*
+
+## 🛠️ Tamamlanan ve Geliştirilen Uygulamalar
+
+### 🔹 GPIO ve Temel Çevre Birimleri
+* **GPIO İşlemleri:** Digital Output (LED, Buzzer) ve Digital Input (Button) uygulamaları
+* **Button State Control & Counter:** Aktif-Düşük (Active-Low) ve Aktif-Yüksek buton okuma, buton ile sayıcı (Counter) mantığı
+* **Hata Ayıklama (Debug):** STM32CubeIDE üzerinden **SWV / ITM Live Data Trace** ile canlı değişken ve durum takibi
+
+### 🔹 Analog Arayüzler (ADC / DAC)
+* **ADC Uygulamaları:** Potansiyometre ve NTC Termistör ile analog veri okuma, sıcaklık/gerilim hesaplamaları
+
+### 🔹 Zamanlayıcılar (Timers) & Kesmeler (Interrupts)
+* **External Interrupt (EXTI):** Harici kesme mekanizmaları ile buton kontrolü
+* **Hardware Timers:** Timer kesmeleri (TIM Interrupts) ile zamanlama kontrolü
+
+### 🔹 Motor Sürücüler ve Aktüatörler
+* Transistör ile DC Motor kontrolü
+* **L293D Entegresi** ile DC Motor yön ve hız kontrolü
+* **ULN2003AN Entegresi** ile Stepper (Adım) Motor sürülmesi
+* **Seven Segment Display:** Çoklamalı (Multiplexed) ekran sürücü uygulamaları
+
+### 🔹 Seri İletişim Protokolleri *(Aktif Çalışma)*
+* **UART / USART:** Asenkron seri haberleşme ve veri iletimi
+
+---
+
+👩‍💻 **Geliştirici:** Feyza Yağmur Arat  
+🎓 **Bölüm:** Mersin Üniversitesi - Elektrik-Elektronik Mühendisliği  
+🛠️ **Geliştirme Ortamı:** STM32CubeIDE | STM32Cube HAL  
+🎯 **Donanım:** STM32F407VG Discovery Board
