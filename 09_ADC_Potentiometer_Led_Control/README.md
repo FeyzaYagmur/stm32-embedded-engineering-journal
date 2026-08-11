@@ -1,7 +1,7 @@
 # ADC Potentiometer LED Control
 
 This project focuses on executing real-time output control based on continuous analog inputs. By sampling a variable voltage from a potentiometer using the ADC peripheral, the firmware maps the digitized values against specific voltage thresholds to dynamically drive an external LED array.
-
+   
 ## ⚙️ Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **External Components:** 1x 10kΩ Potentiometer, 2x External LEDs, 2x 220Ω/330Ω Resistors
