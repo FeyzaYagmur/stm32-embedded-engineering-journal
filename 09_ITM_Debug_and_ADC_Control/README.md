@@ -1,22 +1,23 @@
-# ITM Debug & ADC Control (Analog Sampling with ITM Redirection)
+# ITM Debugging & ADC Threshold Multi-LED Control System
 
-This project introduces analog signal processing alongside advanced non-intrusive debugging methodologies. It demonstrates how to initialize the Analog-to-Digital Converter (ADC) peripheral to sample external voltages while concurrently redirecting the standard `printf()` output stream directly to the Keil SWV (Serial Wire Viewer) console via hardware ITM (Instrumentation Trace Macrocell) structures.
+This project demonstrates continuous analog signal processing using the 12-bit Analog-to-Digital Converter (ADC1) peripheral on an STM32 microcontroller, combined with non-intrusive ITM (`printf`) retargeted telemetry debug tracking. Raw analog inputs sampled from a 10kΩ potentiometer (`PA1`) are dynamically thresholded to drive a 3-channel visual LED indicator array (Blue, Red, Green) while streaming telemetry data to the SWV debugging console.
 
 ## ⚙️ Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
-- **External Components:** 1x 10kΩ Potentiometer (Analog Voltage Source)
-- **Active Pins:** `PA1` (Configured as ADC1_IN1 Analog Input)
-- **Debugging Bus:** SWD (Serial Wire Debug) with `SWO` pin enabled for real-time trace telemetry.
-- **Method:** Polling-based ADC Acquisition with Hardware-Assisted ITM Instrumentation
+- **Input Component:** 1x 10kΩ Potentiometer (Analog Voltage Source)
+- **Actuators:** 3x External LEDs (Blue, Red, Green)
+- **Active Pins:** `PA1` (ADC1_IN1), `PD3` (Blue LED), `PD4` (Red LED), `PD5` (Green LED)
+- **Resolution:** 12-Bit ADC Resolution ($0 - 4095$ Range)
+- **Debugging:** ITM Trace Macrocell (Retargeted `printf` over SWO pin)
 
 ## 🔍 Key Concepts Covered
-- **ITM Printf Redirection:** Overriding the low-level `_write()` syscall framework to stream character buffers directly into the ARM Cortex core's `ITM->PORT[0]` data registers.
-- **Analog-to-Digital Conversion (ADC):** Configuring peripheral resolutions (12-bit), alignment parameters, and channel sampling cycles to digitize variable external voltages.
-- **Hardware Telemetry Monitoring:** Tracking digitized voltage behaviors dynamically in real-time inside the Keil debugger without halting CPU loop cycles.
+- **ITM Printf Redirection:** Overriding the low-level `_write()` system calls to redirect standard library `printf()` output frames directly into `ITM_SendChar()` data registers.
+- **Dynamic Voltage Thresholding:** Partitioning 12-bit digital ranges ($0 - 4095$) into discrete operational bands to dynamically activate dedicated color-coded LEDs (Blue, Red, Green).
+- **Mixed-Signal Interfacing & Telemetry:** Simultaneous execution of high-speed analog-to-digital conversions, GPIO state switching, and non-blocking real-time debug reporting.
 
-## 💻 Complete Source Code (`main.c` & ADC/ITM Init)
+## 💻 Complete Source Code (`main.c` / Videodaki Çalışmaya Birebir Uygun)
 
-Below is the complete hardware control logic, ITM printf redirection architecture, and peripheral configuration:
+Below is the complete implementation incorporating retargeted ITM printf functionality, ADC polling, and 3-color LED threshold actuation:
 
 ```c
 #include "main.h"
@@ -24,7 +25,7 @@ Below is the complete hardware control logic, ITM printf redirection architectur
 
 ADC_HandleTypeDef hadc1;
 
-/* Retargets the C library printf function to the ITM (Instrumentation Trace Macrocell) */
+/* Retarget C library printf function to ITM (Instrumentation Trace Macrocell) */
 int _write(int file, char *ptr, int len)
 {
   int i;
@@ -35,12 +36,11 @@ int _write(int file, char *ptr, int len)
   return len;
 }
 
-/* ADC1 Peripherals Initialization Function */
+/* ADC1 Peripheral Initialization Function */
 static void MX_ADC1_Init(void)
 {
   ADC_ChannelConfTypeDef sConfig = {0};
 
-  /** Configure the global features of the ADC (Clock, Resolution, Data Alignment) */
   hadc1.Instance = ADC1;
   hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
   hadc1.Init.Resolution = ADC_RESOLUTION_12B; // 0 to 4095 digital range
@@ -55,31 +55,35 @@ static void MX_ADC1_Init(void)
   hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
   HAL_ADC_Init(&hadc1);
 
-  /** Configure for the selected ADC regular channel (PA1) */
-  sConfig.Channel = ADC_CHANNEL_1;
+  sConfig.Channel = ADC_CHANNEL_1; // Configured on PA1
   sConfig.Rank = 1;
   sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
   HAL_ADC_ConfigChannel(&hadc1, &sConfig);
 }
 
-/* GPIO Initialization Function */
+/* GPIO Initialization Function (Blue, Red, Green LEDs) */
 static void MX_GPIO_Init(void)
 {
-  /* Enable GPIO Port Clocks */
-  __HAL_RCC_GPIOH_CLK_ENABLE();
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+
+  /* Clear LED pin outputs initially */
+  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5, GPIO_PIN_RESET);
+
+  /* Configure PD3 (Blue), PD4 (Red), PD5 (Green) as Outputs */
+  GPIO_InitStruct.Pin = GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 }
 
-/* Infinite Loop inside main() */
 int main(void)
 {
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
-
-  /* Configure the system clock */
   SystemClock_Config();
-
-  /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_ADC1_Init();
 
@@ -88,22 +92,41 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* Start the Analog to Digital Conversion */
+    /* Start Analog to Digital Conversion */
     HAL_ADC_Start(&hadc1);
 
-    /* Poll for the conversion process completion */
+    /* Poll ADC conversion process */
     if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK)
     {
-      /* Read the digitized raw ADC conversion result value */
+      /* Read 12-bit raw digital conversion value */
       adcValue = HAL_ADC_GetValue(&hadc1);
 
-      /* Transmit telemetry tracking data over the hardware SWO pin via ITM printf */
-      printf("Raw ADC Value monitored via ITM: %lu\n", adcValue);
+      /* Threshold Actuation Logic for Blue, Red, Green LEDs */
+      if (adcValue < 1365)
+      {
+        /* Zone 1: Blue LED ON */
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_4, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_5, GPIO_PIN_RESET);
+      }
+      else if (adcValue >= 1365 && adcValue < 2730)
+      {
+        /* Zone 2: Red LED ON */
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_4, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_5, GPIO_PIN_RESET);
+      }
+      else
+      {
+        /* Zone 3: Green LED ON */
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_4, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_5, GPIO_PIN_SET);
+      }
     }
 
-    /* Stop conversion and delay the loop cycle */
     HAL_ADC_Stop(&hadc1);
-    HAL_Delay(500);
+    HAL_Delay(100);
 
     /* USER CODE END WHILE */
   }
