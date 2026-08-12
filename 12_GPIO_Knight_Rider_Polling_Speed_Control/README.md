@@ -2,18 +2,18 @@
 
 This project controls the speed of a sequential Knight Rider LED chaser using digital polling on an external push-button switch. It demonstrates how to update timing parameters dynamically during execution, altering scanning intervals across multi-pin sequences.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **External Components:** 4x External LEDs, 1x Push-Button, 5x Resistors
 - **Active Pins:** `PD0`, `PD1`, `PD2`, `PD3` (LED Bus Outputs), `PA0` (Button Input)
 - **Method:** Polling-Based Dynamic Delay Speed Selection
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **Dynamic Speed Modulation:** Altering execution delay values (`speedDelay`) in real-time based on physical button inputs.
 - **In-Loop Polling Execution:** Interrogating input pin states across sequential output cycles to ensure responsiveness during pattern execution.
 - **Timing Boundaries:** Switching between predefined step delays (e.g., Fast: 50ms, Medium: 150ms, Slow: 300ms) using state iteration.
 
-## 💻 Complete Source Code (`main.c` & GPIO Init)
+##  Complete Source Code (`main.c` & GPIO Init)
 
 Below is the complete hardware control logic and peripheral configuration for the speed-controlled Knight Rider chaser:
 
