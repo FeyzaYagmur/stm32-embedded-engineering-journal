@@ -2,18 +2,18 @@
 
 This project focuses on executing real-time output control based on continuous analog inputs. By sampling a variable voltage from a potentiometer using the ADC peripheral, the firmware maps the digitized values against specific voltage thresholds to dynamically drive an external LED array.
    
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **External Components:** 1x 10kΩ Potentiometer, 2x External LEDs, 2x 220Ω/330Ω Resistors
 - **Active Pins:** `PA1` (ADC1_IN1 Analog Input), `PD0` (LED 1 Output), `PD1` (LED 2 Output)
 - **Method:** Multi-Threshold Analog Voltage Mapping via Polled ADC Conversion
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **Analog Input Mapping:** Translating a continuous hardware voltage signal into 12-bit digital values ($0$ to $4095$) to drive multi-state logical outputs.
 - **Threshold-Based Switching:** Setting operational software boundaries (thresholds) to trigger discrete external hardware actions based on an analog range.
 - **Signal Control Logic:** Interfacing analog sensing circuits with multiple digital output channels concurrently within a single processing cycle.
 
-## 💻 Complete Source Code (`main.c` & ADC/GPIO Init)
+##  Complete Source Code (`main.c` & ADC/GPIO Init)
 
 Below is the complete hardware control logic and the peripheral configuration for the potentiometer-based LED control:
 
