@@ -2,18 +2,18 @@
 
 This project introduces real analog signal synthesis using the Digital-to-Analog Converter (DAC) peripheral. It demonstrates how to generate a periodic Sawtooth (Ramp) waveform using 8-bit right-aligned DAC output values, driving an external LED with linear voltage ramping transitions.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **External Components:** 1x External LED, 1x 220Ω Current-Limiting Resistor
 - **Active Pins:** `PA4` (DAC_OUT1 Channel 1 Output Pin)
 - **Method:** Iterative 8-Bit Right-Aligned Value Loading (`DAC_ALIGN_8B_R`)
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **Analog Signal Synthesis:** Converting digital numeric increments ($0$ to $255$) into a continuous, linear voltage ramp ($0\text{V}$ to $3.3\text{V}$) via hardware DAC registers.
 - **Sawtooth Wave Generation:** Structuring iterative loop counts to produce periodic ramp signals that reset instantly upon reaching maximum DAC resolution boundaries.
 - **8-Bit Resolution Alignment:** Utilizing `DAC_ALIGN_8B_R` alignment modes to optimize memory bus utilization during real-time analog wave generation.
 
-## 💻 Complete Source Code (`main.c` & DAC Init)
+##  Complete Source Code (`main.c` & DAC Init)
 
 Below is the complete hardware control logic and the peripheral configuration for the DAC Sawtooth Wave Generator:
 
