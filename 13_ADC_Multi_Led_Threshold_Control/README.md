@@ -2,18 +2,18 @@
 
 This project implements an advanced multichannel analog threshold controller using the Analog-to-Digital Converter (ADC) peripheral. By continuous sampling of an external potentiometer's output voltage, the firmware maps digitized 12-bit results into distinct dynamic operating ranges, sequentially driving a 3-element external LED array based on physical input modifications.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **External Components:** 1x 10kΩ Potentiometer, 3x External LEDs (Blue, Red, Green), 3x 220Ω/330Ω Current-Limiting Resistors
 - **Active Pins:** `PA1` (ADC1_IN1 Analog Input), `PD0` (Blue LED Output), `PD1` (Red LED Output), `PD2` (Green LED Output)
 - **Method:** Multi-Zone Boundary Evaluation via Continuous Polled ADC Sampling
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **Multi-Level Voltage Mapping:** Segmenting a continuous 0 to 3.3V analog input range into multiple distinct software voltage zones utilizing digitized data scales (0 - 4095).
 - **Cascaded Peripheral Control:** Designing sequential control architectures where outputs cascade dynamically (turning pins ON and OFF one by one) depending on potentiometer calibration positions.
 - **Signal Multi-plexing Logic:** Interfacing a single analog sensor channel to drive an isolated array of three output indicators asynchronously inside high-speed loops.
 
-## 💻 Complete Source Code (`main.c` & ADC/GPIO Init)
+##  Complete Source Code (`main.c` & ADC/GPIO Init)
 
 Below is the complete hardware control logic and the specific configuration routines for this analog execution:
 
