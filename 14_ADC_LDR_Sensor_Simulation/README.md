@@ -2,18 +2,18 @@
 
 This project simulates an environmental LDR (Light Dependent Resistor) sensing system using a potentiometer-driven ADC input channel. Due to hardware component emulation techniques, physical ambient light transitions are simulated via analog voltage division, driving an automatic multi-level night-light LED system based on ambient luminance thresholds.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **External Components:** 1x 10kΩ Potentiometer (Emulating LDR Sensor), 3x External LEDs (Blue, Green, Red), 3x Resistors
 - **Active Pins:** `PA1` (ADC1_IN1 Analog Sensor Input), `PA3` (Blue LED Output), `PA1` (Green LED Output), `PA2` (Red LED Output)
 - **Method:** Sensor Emulation & Threshold-Based Automatic Lighting Control
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **Hardware Sensor Emulation:** Utilizing variable potentiometer voltage sources to mirror resistive sensor behaviors (e.g., LDRs) for firmware verification prior to physical sensor integration.
 - **Luminance Threshold Categorization:** Translating raw ADC data into environmental lighting zones (Darkness, Dim Light, Full Daylight) to control automated lighting logic.
 - **Inverted Ambient Control Logic:** Designing automated safety responses where lowering the simulated luminance triggers additional visual indicator outputs.
 
-## 💻 Complete Source Code (`main.c` & ADC/GPIO Init)
+##  Complete Source Code (`main.c` & ADC/GPIO Init)
 
 Below is the complete hardware control logic and the specific configuration routines for this LDR simulation project:
 
