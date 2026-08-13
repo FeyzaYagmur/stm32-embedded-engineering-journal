@@ -2,18 +2,18 @@
 
 This project combines both peripheral processing domains—Analog-to-Digital Conversion (ADC) and Digital-to-Analog Conversion (DAC)—into a real-time signal loopback system. The MCU continuously samples an analog voltage from a potentiometer via a 12-bit ADC, maps the digital result, and directly reconstructs the analog signal on the 12-bit DAC output to drive an external LED with full dynamic fidelity.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **External Components:** 1x 10kΩ Potentiometer, 1x External LED, 1x 220Ω Resistor
 - **Active Pins:** `PA1` (ADC1_IN1 Input Pin), `PA4` (DAC_OUT1 Output Pin)
 - **Method:** 12-Bit Direct Bus Passthrough (`ADC_RESOLUTION_12B` to `DAC_ALIGN_12B_R`)
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **Analog Loopback Processing:** Acquiring continuous environmental voltage inputs via ADC and immediately mirroring them to DAC hardware channels without signal degradation.
 - **12-Bit Resolution Matching:** Synchronizing ADC raw output values ($0 - 4095$) directly with 12-bit right-aligned DAC write buffers (`DAC_ALIGN_12B_R`).
 - **Real-Time Signal Conversion:** Executing low-latency hardware-level acquisition-to-generation pipeline inside execution loop cycles.
 
-## 💻 Complete Source Code (`main.c` & Peripheral Init)
+##  Complete Source Code (`main.c` & Peripheral Init)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
