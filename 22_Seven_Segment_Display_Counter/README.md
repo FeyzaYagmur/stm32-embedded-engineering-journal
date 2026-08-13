@@ -4,18 +4,18 @@
 
 This project implements a 0-to-9 numerical decimal counter using a single-digit 7-Segment Display. It demonstrates Common Anode segment driver logic, LUT (Look-Up Table) matrix mapping, and iterative GPIO output pin control using STM32 HAL libraries.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU / Target:** STM32C031C6 / STM32 Platform
 - **Display Component:** Single-Digit 7-Segment Display (Common Anode)
 - **Active Pins:** `PA2`, `PA3`, `PA4`, `PA5`, `PA6` (Segments A-E) and `PB9`, `PB10` (Segments F-G)
 - **Method:** 2D Lookup Array Mapping with Active-Low Common Anode Driving
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **Simulated Hardware Prototyping:** Validating display driver logic, pin mappings, and visual timing intervals using virtual simulation environments prior to physical assembly.
 - **Common Anode Active-Low Driving:** Configuring digital pin output logic where low logic level (`GPIO_PIN_RESET` / `0`) energizes the corresponding LED segment.
 - **Pure STM32 HAL Array Iteration:** Looping through custom mapped `GPIO_TypeDef*` and `GPIO_Pins` arrays inside custom driver routines (`Show_Digit()`).
 
-## 💻 Complete Production Source Code (`main.c` / Pure STM32 HAL)
+##  Complete Production Source Code (`main.c` / Pure STM32 HAL)
 
 Below is the production-ready C codebase utilizing native STM32 HAL drivers:
 
