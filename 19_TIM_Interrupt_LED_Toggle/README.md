@@ -2,18 +2,18 @@
 
 This project advances hardware timing execution by implementing **Timer Interrupts (IT)** with the General-Purpose Timer 2 (TIM2) peripheral. By offloading time-keeping completely from the main execution loop (`while(1)`), the firmware executes background LED toggling asynchronously inside the hardware-triggered `HAL_TIM_PeriodElapsedCallback()` routine upon counter overflow events.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **Peripherals Used:** TIM2 (32-bit Timer in Interrupt Mode), Onboard LEDs
 - **Active Pins:** `PD12` (Green LED Output), `PD13` (Orange LED Output)
 - **Method:** Asynchronous Interrupt Handling via `HAL_TIM_PeriodElapsedCallback()`
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **Asynchronous Interrupt Processing:** Offloading periodic routine execution from the CPU's main polling loop into hardware-triggered Interrupt Service Routines (ISR).
 - **HAL Timer Callback Architecture:** Utilizing the weak-bound `HAL_TIM_PeriodElapsedCallback()` function to safely execute user code when a specific timer instance (`htim->Instance == TIM2`) triggers a Period Elapsed event.
 - **Zero-CPU-Load Delay Architecture:** Achieving completely non-blocking LED state transitions while keeping the main application loop (`while(1)`) entirely empty for power efficiency and multitasking.
 
-## 💻 Complete Source Code (`main.c` & TIM2 Interrupt Logic)
+##  Complete Source Code (`main.c` & TIM2 Interrupt Logic)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
