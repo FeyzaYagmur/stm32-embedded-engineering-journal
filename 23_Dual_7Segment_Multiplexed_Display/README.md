@@ -1,13 +1,15 @@
 # Dual 7-Segment Multiplexed Display Driver (STM32 HAL & Wokwi Simulation)
 
-> **Note on Implementation:** Due to physical display module availability constraints during initial verification, visual execution was simulated within the **Wokwi simulation platform**. The production codebase is built using **pure C and native STM32 HAL** routines (`HAL_GPIO_WritePin`, `GPIO_TypeDef`), demonstrating professional hardware multiplexing techniques.
+> **Note on Implementation:** Due to physical display module availability constraints during initial verification, visual execution was simulated within the Wokwi simulation platform using the `NUCLEO-C031C6` board. The production codebase is built using pure C and native STM32 HAL routines (`HAL_GPIO_WritePin`, `GPIO_TypeDef`), demonstrating hardware multiplexing techniques.
 
 This project implements a bare-metal driver for a 2-digit multiplexed 7-segment display. Using high-speed Time-Division Multiplexing (TDM), the system parses two-digit numbers into tens and ones places using integer arithmetic (`/` and `%`), rendering them smoothly on a shared segment bus without visual flicker.
 
 ## ⚙️ Hardware & Configuration
-- **MCU:** STM32C031C6 (ARM Cortex-M0+) / Wokwi Platform
+- **MCU / Platform:** STM32C031C6 (ARM Cortex-M0+) / Wokwi Simulation Platform
 - **Display Component:** 2-Digit Common Anode Multiplexed 7-Segment Display
-- **Active Pins:** `PA0`-`PA7` (Shared Segment Bus A-G + DP), `PB0`-`PB1` (Digit Select Transistor Switches)
+- **Active Pins:** 
+  - `PA0` - `PA7` (Shared Segment Bus A-G + DP)
+  - `PB0`, `PB1` (Digit Select Enable Pins)
 - **Method:** High-Frequency Time-Division Multiplexing (TDM) via Pure STM32 HAL Drivers
 
 ## 🔍 Key Concepts Covered
@@ -15,9 +17,7 @@ This project implements a bare-metal driver for a 2-digit multiplexed 7-segment 
 - **Bare-Metal Drivers via HAL:** Direct configuration and manipulation of GPIO register blocks using native `GPIO_InitTypeDef` structures without high-level abstraction delays.
 - **Arithmetic Digit Parsing:** Utilizing integer division (`/ 10`) and modulo arithmetic (`% 10`) to separate multi-digit integers into discrete display variables.
 
-## 💻 Complete Production Source Code (`main.c` / STM32 HAL Driver)
-
-Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
+## 💻 Complete Production Source Code (`main.c`)
 
 ```c
 #include "main.h"
@@ -88,13 +88,23 @@ void Coklu_Ekran_Goster(uint8_t sayi)
   uint8_t onlar_basamagi = sayi / 10;
   uint8_t birler_basamagi = sayi % 10;
 
-  /* Step 1: Render Tens Digit on Left Display */
+  /* Step 1: Render Tens Digit on Left Display (PB0) */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);   // Enable Left Digit
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_RESET); // Disable Right Digit
+  
+  /* Write segment data to GPIOA bus */
+  for (int i = 0; i < 8; i++) {
+    HAL_GPIO_WritePin(GPIOA, (1 << i), (segment_kodlari[onlar_basamagi] & (1 << i)) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+  }
   HAL_Delay(5);
 
-  /* Step 2: Render Ones Digit on Right Display */
+  /* Step 2: Render Ones Digit on Right Display (PB1) */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET); // Disable Left Digit
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_SET);   // Enable Right Digit
+  
+  /* Write segment data to GPIOA bus */
+  for (int i = 0; i < 8; i++) {
+    HAL_GPIO_WritePin(GPIOA, (1 << i), (segment_kodlari[birler_basamagi] & (1 << i)) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+  }
   HAL_Delay(5);
 }
