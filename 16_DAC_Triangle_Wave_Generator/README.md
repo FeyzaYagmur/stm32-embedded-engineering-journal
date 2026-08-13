@@ -2,18 +2,18 @@
 
 This project expands on analog signal synthesis by generating a continuous, symmetric Triangle Waveform using the Digital-to-Analog Converter (DAC) peripheral. It demonstrates how to combine sequential voltage ramping (upward slope) and voltage decay (downward slope) to drive an external LED with smooth, breathing-style linear intensity modulation.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **External Components:** 1x External LED, 1x 220Ω Current-Limiting Resistor
 - **Active Pins:** `PA4` (DAC_OUT1 Channel 1 Output Pin)
 - **Method:** Dual-Phase Loop Iteration (Ramp-Up and Ramp-Down Synthesis)
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **Symmetric Waveform Synthesis:** Programming bi-directional loop transitions ($0 \rightarrow 255 \rightarrow 0$) to form linear upward and downward voltage slopes.
 - **Continuous Analog Modulation:** Utilizing 8-bit DAC resolution modes (`DAC_ALIGN_8B_R`) to ensure smooth visual intensity transitions without step-wise quantization noise.
 - **Signal Frequency Calibration:** Controlling signal period and symmetry through precise delay loop parameters (`HAL_Delay`).
 
-## 💻 Complete Source Code (`main.c` & DAC Init)
+##  Complete Source Code (`main.c` & DAC Init)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
