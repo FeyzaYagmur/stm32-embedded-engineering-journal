@@ -2,18 +2,18 @@
 
 This project implements a bare-metal, custom time-base generator by directly configuring the ARM Cortex-M core's internal SysTick (System Tick) core timer without relying on standard blocking library abstraction functions (`HAL_Delay`). By configuring the SysTick timer to issue hardware interrupts every 1ms (`SystemCoreClock / 1000`), the firmware executes non-blocking atomic counter decrements using volatile memory qualifiers inside the vector table interrupt service routine.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4 Core)
 - **Core Peripheral:** SysTick (24-bit Down-Counting System Tick Timer)
 - **Active Pins:** `PD12` (Onboard Green LED Output)
 - **Method:** Custom `SysTick_Config()` Setup with ISR-based volatile Counter Decrement
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **SysTick Core Architecture:** Configuring the 24-bit internal system tick timer directly coupled with the Cortex-M core for high-precision time base generation.
 - **Volatile Qualifier Usage:** Employing the `volatile` keyword (`volatile uint32_t ms_counter`) to prevent compiler optimization loops when shared variables are modified asynchronously inside Interrupt Service Routines (ISRs).
 - **Custom Hardware Delay Implementation:** Designing an atomic, non-blocking software blocking routine (`Custom_Delay_ms()`) driven by core SysTick hardware interrupt pulses.
 
-## 💻 Complete Source Code (main.c & stm32f4xx_it.c)
+##  Complete Source Code (main.c & stm32f4xx_it.c)
 
 Below is the implementation logic across the system tick configuration, custom delay function, and vector table interrupt service handler:
 
