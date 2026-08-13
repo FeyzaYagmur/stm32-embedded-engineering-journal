@@ -2,18 +2,18 @@
 
 This project introduces hardware timing functionality using the General-Purpose Timer 2 (TIM2) peripheral. It demonstrates how to initialize the timer in basic time-base counter mode and poll the hardware counter register (`CNT`) in real-time to trigger multi-channel onboard LED outputs without relying on blocking delay functions.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **Peripherals Used:** TIM2 (General Purpose 32-bit Timer), Onboard LEDs
 - **Active Pins:** `PD12` (Green LED), `PD13` (Orange LED), `PD14` (Red LED), `PD15` (Blue LED)
 - **Method:** Non-Blocking Hardware Timer Register Polling via `__HAL_TIM_GET_COUNTER()`
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **Hardware Time-Base Generation:** Utilizing internal clock sources and prescaler/auto-reload register (ARR) configurations to establish precise tick intervals.
 - **Counter Register Interrogation:** Direct extraction of the instantaneous counter value from hardware registers using the `__HAL_TIM_GET_COUNTER()` macro.
 - **Non-Blocking Logic Execution:** Decoupling timing constraints from CPU blocking routines (`HAL_Delay`), allowing simultaneous background task processing.
 
-## 💻 Complete Source Code (`main.c` & TIM2 Init)
+##  Complete Source Code (`main.c` & TIM2 Init)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
