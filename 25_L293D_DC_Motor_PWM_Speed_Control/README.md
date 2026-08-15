@@ -2,19 +2,19 @@
 
 This project demonstrates closed-loop speed and directional control of a DC motor using an **L293D H-Bridge Motor Driver IC** interfaced with an STM32 microcontroller. The setup utilizes General-Purpose Timer 2 (TIM2 Channel 3) to deliver variable Duty Cycle Pulse Width Modulation (PWM) signals to the driver's Enable pin, enabling dynamic multi-speed operation.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **Motor Driver IC:** L293D Dual H-Bridge Driver
 - **Actuator:** 3V-6V DC Brushed Motor
 - **Active Pins:** `PA0`, `PA1` (Direction Control Direction Pins IN1/IN2), `PA2` (TIM2_CH3 PWM Output to EN1)
 - **Method:** H-Bridge Direction Steering with Discrete PWM Speed Stepping (`__HAL_TIM_SET_COMPARE`)
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **H-Bridge Driver Architecture:** Controlling DC motor rotation polarity (Clockwise / Counter-Clockwise) via complementary logic outputs on L293D direction pins (`PA0` / `PA1`).
 - **PWM Speed Modulation:** Regulating motor angular velocity by feeding variable duty cycle PWM pulses into the driver enable pin (EN1).
 - **Multi-Level Speed Stepping:** Iterating through predefined Capture/Compare Register (CCR) values (`300`, `600`, `1000`) with $2000\text{ms}$ step intervals to demonstrate discrete speed ramps.
 
-## 💻 Complete Source Code (`main.c` & TIM2 PWM Init)
+##  Complete Source Code (`main.c` & TIM2 PWM Init)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
