@@ -2,7 +2,7 @@
 
 This project demonstrates asynchronous serial data communication using the Universal Synchronous Asynchronous Receiver Transmitter (USART2) peripheral on an STM32 microcontroller. The setup transmits structured text strings to a host PC serial terminal (Termite) via an onboard USB-to-UART bridge using blocking HAL transmission routines.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **Peripheral:** USART2 (Asynchronous Mode)
 - **Baud Rate:** 115200 bps (8 Data Bits, 1 Stop Bit, No Parity)
@@ -10,12 +10,12 @@ This project demonstrates asynchronous serial data communication using the Unive
 - **Host Terminal:** Termite 3.4 Serial Monitor
 - **Method:** Polling-Based Data Transmission via `HAL_UART_Transmit()`
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **Asynchronous Serial Framing:** Configuring standard UART packet structures (Baud Rate, Frame Bits, Parity) for seamless inter-device serial communication.
 - **Buffer Management & Null Termination Handling:** Utilizing `sizeof(mesaj) - 1` and `\r\n` (CRLF) formatting to strip null-terminators (`\0`) while formatting multi-line serial outputs.
 - **Blocking Mode Transmission:** Implementing timeout-managed data transfer via `HAL_UART_Transmit()` to ensure complete packet transmission to the host receiver.
 
-## 💻 Complete Source Code (`main.c` & USART2 Init)
+##  Complete Source Code (`main.c` & USART2 Init)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
