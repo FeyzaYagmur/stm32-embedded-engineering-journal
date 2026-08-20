@@ -2,7 +2,7 @@
 
 This project demonstrates two-way (full-duplex / bi-directional) serial communication using the Universal Synchronous Asynchronous Receiver Transmitter (USART2) peripheral on an STM32 microcontroller. The firmware listens for incoming ASCII command characters (`'1'` and `'0'`) sent from a host PC serial terminal (Termite) via blocking `HAL_UART_Receive()` routines, toggles an onboard LED, and transmits confirmation status messages back to the host interface.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **Peripheral:** USART2 (Asynchronous Full-Duplex Mode)
 - **Baud Rate:** 115200 bps (8 Data Bits, 1 Stop Bit, No Parity)
@@ -10,12 +10,12 @@ This project demonstrates two-way (full-duplex / bi-directional) serial communic
 - **Host Terminal:** Termite 3.4 Serial Monitor
 - **Method:** Blocking Serial Reception via `HAL_UART_Receive(&huart2, &rxData, 1, HAL_MAX_DELAY)`
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **Bi-Directional Serial Command Processing:** Parsing incoming ASCII byte values to execute hardware state changes and returning status confirmation strings over the same bus.
 - **Blocking Mode RX Handling:** Utilizing `HAL_MAX_DELAY` inside polling-based reception calls to halt thread execution until a valid byte arrives in the UART RX buffer register.
 - **Hardware Feedback Integration:** Driving onboard status LEDs conditionally (`HAL_GPIO_WritePin`) based on serial terminal command inputs.
 
-## 💻 Complete Source Code (`main.c` & USART2 Command Handling)
+##  Complete Source Code (`main.c` & USART2 Command Handling)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
