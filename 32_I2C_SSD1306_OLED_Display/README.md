@@ -2,7 +2,7 @@
 
 This project demonstrates hardware interfacing and dynamic buffer rendering for a **0.96-inch SSD1306 Monochrome OLED Display (128x64 resolution)** using the I2C serial communication protocol on an STM32 microcontroller. The firmware initializes display buffers, clears screen framebuffers (`SSD1306_Clear`), and updates multi-line text strings dynamically using custom font definitions.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **Display Component:** 0.96" SSD1306 OLED Display ($128 \times 64$ Resolution)
 - **Protocol:** I2C (Inter-Integrated Circuit) Bus
@@ -10,12 +10,12 @@ This project demonstrates hardware interfacing and dynamic buffer rendering for 
 - **Active Pins:** `PB6` (I2C1_SCL Clock Line), `PB7` (I2C1_SDA Data Line)
 - **Method:** Memory Framebuffer Manipulation with Sequential Page Redraws
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **I2C Bus Protocol Verification:** Managing two-wire synchronous data transfers (SCL/SDA) to stream pixel buffer commands to graphics controller ICs.
 - **Dynamic Screen Buffer Updating:** Executing buffer clears (`SSD1306_Clear()`), positioning coordinate pointers (`SSD1306_GotoXY()`), and pushing frame updates (`SSD1306_UpdateScreen()`).
 - **Sequential String Transition Rendering:** Demonstrating dynamic display updates by sequencing system introduction strings (`WELCOME TO EMBEDDED SYSTEMS`) followed by personalized developer identification signatures (`FEYZA YAGMUR`).
 
-## 💻 Complete Source Code (`main.c` / Dual-State Sequence)
+##  Complete Source Code (`main.c` / Dual-State Sequence)
 
 Below is the complete C code demonstrating the dynamic screen buffer update logic used in the execution:
 
