@@ -2,19 +2,19 @@
 
 This project demonstrates full-duplex serial communication using the **Serial Peripheral Interface 1 (SPI1)** peripheral on an STM32 microcontroller. Utilizing the simultaneous blocking routine `HAL_SPI_TransmitReceive()`, the firmware sends data packets over the MOSI line while concurrently capturing incoming bytes from the MISO line via hardware loopback wire jumpers, validating payload integrity (`0x55`) to toggle status indicators.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **Peripheral:** SPI1 (Full-Duplex Master Mode)
 - **Active Pins:** `PA5` (SPI1_SCK), `PA6` (SPI1_MISO), `PA7` (SPI1_MOSI), `PD12` (Onboard Green LED Output)
 - **Test Setup:** Hardware Loopback (Physical connection jumper between `PA6` MISO and `PA7` MOSI)
 - **Method:** Synchronous Blocking Bidirectional Transfer via `HAL_SPI_TransmitReceive()`
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **Full-Duplex SPI Architecture:** Simultaneous bidirectional shift register data clocking (tx/rx) driven by Master Clock (SCK) pulses.
 - **Hardware Loopback Bus Verification:** Directing MOSI output signals physically back into MISO input pins to test driver stack reliability without external slave chips.
 - **Payload Validation & GPIO Toggling:** Comparing received SPI byte buffers (`gelenVeri == 0x55`) to drive conditional LED outputs (`PD12`).
 
-## 💻 Complete Source Code (`main.c` / Videodaki Kod ile Birebir)
+##  Complete Source Code (`main.c` / Videodaki Kod ile Birebir)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
