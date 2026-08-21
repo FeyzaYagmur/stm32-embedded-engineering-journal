@@ -2,19 +2,19 @@
 
 This project demonstrates ultra-low-power embedded architecture using the STM32 ARM Cortex-M4 **Standby Mode** combined with **RTC Backup Domain Registers (BDR)**. The firmware places the microcontroller into its lowest power consumption state (`HAL_PWR_EnterSTANDBYMode()`), where the internal voltage regulator and clock domains are shut down. Upon detection of a high-level pulse on the dedicated hardware WakeUp pin (`PA0` / `PWR_WAKEUP_PIN1`), the core undergoes a system reset, increments an persistent wake-up counter stored in Non-Volatile Backup RAM (`RTC_BKP_DR1`), and signals state resumption via status LED indicators (`PD12`).
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **Power Mode:** Standby Mode (`HAL_PWR_EnterSTANDBYMode()`)
 - **Wake-Up Source:** Hardware `PWR_WAKEUP_PIN1` (`PA0` Button Edge Trigger)
 - **Persistent Memory:** RTC Backup Domain Register 1 (`RTC_BKP_DR1`)
 - **Active Pins:** `PA0` (WakeUp Pin 1 Input), `PD12` (Onboard Green LED Output)
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **Deep Standby Mode Architecture:** Achieving sub-microamp power consumption by de-energizing the core logic domain, main SRAM, and internal clock trees.
 - **RTC Backup Domain (BDR) Persistence:** Utilizing battery-backed register blocks (`HAL_RTCEx_BKUPRead` / `HAL_RTCEx_BKUPWrite`) to retain critical system parameters across CPU power-down and system reset cycles.
 - **Hardware WakeUp Pin Triggering:** Configuring dedicated silicon wakeup lines (`HAL_PWR_EnableWakeUpPin`) to trigger cold-start processor resets directly out of deep sleep modes.
 
-## 💻 Complete Source Code (`main.c` / Videodaki Yapı ile Birebir)
+##  Complete Source Code (`main.c` / Videodaki Yapı ile Birebir)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
