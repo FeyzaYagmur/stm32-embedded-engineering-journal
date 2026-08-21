@@ -28,7 +28,7 @@ This project implements a modular hardware driver for a 16x2 HD44780-compatible 
 
 
 
-### 1. Header File (`Core/Inc/i2c_lcd16x2.h`)
+// 1. Header File (`Core/Inc/i2c_lcd16x2.h`)
 
 ```c
 #ifndef INC_I2C_LCD16X2_H_
@@ -56,7 +56,7 @@ void    LCD_Temizle(I2C_HandleTypeDef *hi2c);
 
 
 
-### 2. Driver Source File (Core/Src/i2c_lcd16x2.c)
+// 2. Driver Source File (Core/Src/i2c_lcd16x2.c)
 #include "i2c_lcd16x2.h"
 
 // 1. Send Command Function
@@ -154,7 +154,7 @@ void LCD_Metin_Yaz(I2C_HandleTypeDef *hi2c, char *metin)
 
 
 
-### 3. Application Main File (Core/Src/main.c)
+// 3. Application Main File (Core/Src/main.c)
 #include "main.h"
 #include "i2c_lcd16x2.h"
 #include <stdio.h>
