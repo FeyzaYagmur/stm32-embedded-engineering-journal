@@ -21,22 +21,25 @@ This project implements a modular hardware driver for a 16x2 HD44780-compatible 
 - **Analog-to-Digital Conversion & Calibration:** Polling 12-bit ADC data ($0 - 4095$) and computing real analog potential via linear voltage scaling ($V = \frac{\text{ADC}}{4095} \times 3.3\text{V}$).
 - **Fixed-Point Formatting:** Separating float values into integer and fractional parts for display rendering without floating-point `printf` overhead.
 
+---
+
 ## 💻 Complete Production Source Code
 
-```c
-/* ==================================================================== */
-/* 1. DRIVER HEADER FILE (Core/Inc/i2c_lcd16x2.h)                       */
-/* ==================================================================== */
 
+
+
+### 1. Header File (`Core/Inc/i2c_lcd16x2.h`)
+
+```c
 #ifndef INC_I2C_LCD16X2_H_
 #define INC_I2C_LCD16X2_H_
 
 #include "stm32f4xx_hal.h"
 
-// 16x2 I2C Backpack Address (0x27 << 1 = 0x4E)
+/* 1. DEFINE (I2C Address) */
 #define LCD_I2C_ADDR        (0x27 << 1)
 
-/* Function Prototypes */
+/* 2. FUNCTION PROTOTYPES */
 uint8_t LCD_Baslat(I2C_HandleTypeDef *hi2c);
 void    LCD_Komut_Gonder(I2C_HandleTypeDef *hi2c, char komut);
 void    LCD_Veri_Gonder(I2C_HandleTypeDef *hi2c, char veri);
@@ -47,13 +50,16 @@ void    LCD_Temizle(I2C_HandleTypeDef *hi2c);
 #endif /* INC_I2C_LCD16X2_H_ */
 
 
-/* ==================================================================== */
-/* 2. DRIVER IMPLEMENTATION (Core/Src/i2c_lcd16x2.c)                    */
-/* ==================================================================== */
 
+
+
+
+
+
+/*2. Driver Source File (Core/Src/i2c_lcd16x2.c)*/
 #include "i2c_lcd16x2.h"
 
-// 1. Send Command Function (4-bit I2C Packaging)
+// 1. Send Command Function
 void LCD_Komut_Gonder(I2C_HandleTypeDef *hi2c, char komut)
 {
     char ust_parca, alt_parca;
@@ -70,7 +76,7 @@ void LCD_Komut_Gonder(I2C_HandleTypeDef *hi2c, char komut)
     HAL_I2C_Master_Transmit(hi2c, LCD_I2C_ADDR, paket, 4, 100);
 }
 
-// 2. Send Character / Data Function
+// 2. Send Data Function
 void LCD_Veri_Gonder(I2C_HandleTypeDef *hi2c, char veri)
 {
     char ust_parca, alt_parca;
@@ -87,12 +93,12 @@ void LCD_Veri_Gonder(I2C_HandleTypeDef *hi2c, char veri)
     HAL_I2C_Master_Transmit(hi2c, LCD_I2C_ADDR, paket, 4, 100);
 }
 
-// 3. Initialize LCD Display
+// 3. Initialize LCD
 uint8_t LCD_Baslat(I2C_HandleTypeDef *hi2c)
 {
     if (HAL_I2C_IsDeviceReady(hi2c, LCD_I2C_ADDR, 2, 100) != HAL_OK)
     {
-        return 0; // LCD Device Not Found
+        return 0;
     }
 
     HAL_Delay(50);
@@ -102,20 +108,19 @@ uint8_t LCD_Baslat(I2C_HandleTypeDef *hi2c)
     HAL_Delay(1);
     LCD_Komut_Gonder(hi2c, 0x30);
     HAL_Delay(10);
-    LCD_Komut_Gonder(hi2c, 0x20); // Switch to 4-bit mode
-    HAL_Delay(10);
+    LCD_Komut_Gonder(hi2c, 0x20); // 4-bit mode
 
-    LCD_Komut_Gonder(hi2c, 0x28); // 2 Lines, 5x8 Font Matrix
+    LCD_Komut_Gonder(hi2c, 0x28); // 2 Lines, 5x8 Font
     HAL_Delay(1);
     LCD_Komut_Gonder(hi2c, 0x08); // Display OFF
     HAL_Delay(1);
     LCD_Komut_Gonder(hi2c, 0x01); // Clear Display
     HAL_Delay(2);
-    LCD_Komut_Gonder(hi2c, 0x06); // Auto-Increment Cursor Right
+    LCD_Komut_Gonder(hi2c, 0x06); // Entry Mode
     HAL_Delay(1);
-    LCD_Komut_Gonder(hi2c, 0x0C); // Display ON, Cursor Invisible
+    LCD_Komut_Gonder(hi2c, 0x0C); // Display ON
 
-    return 1; // Initialization Success
+    return 1;
 }
 
 // 4. Clear Display
@@ -125,7 +130,7 @@ void LCD_Temizle(I2C_HandleTypeDef *hi2c)
     HAL_Delay(2);
 }
 
-// 5. Set Cursor Position (satir: 0 or 1, sutun: 0-15)
+// 5. Set Cursor Position
 void LCD_Konum_Ayarla(I2C_HandleTypeDef *hi2c, uint8_t satir, uint8_t sutun)
 {
     uint8_t adres = (satir == 0) ? (0x80 + sutun) : (0xC0 + sutun);
@@ -142,11 +147,16 @@ void LCD_Metin_Yaz(I2C_HandleTypeDef *hi2c, char *metin)
 }
 
 
-/* ==================================================================== */
-/* 3. APPLICATION ENTRY (Core/Src/main.c)                               */
-/* ==================================================================== */
 
+
+
+
+
+
+
+/* 3. Application Main File (Core/Src/main.c)*/
 #include "main.h"
+#include "i2c_lcd16x2.h"
 #include <stdio.h>
 
 ADC_HandleTypeDef hadc1;
@@ -171,13 +181,13 @@ int main(void)
   MX_I2C1_Init();
   MX_ADC1_Init();
 
-  /* Initialize LCD Display */
+  /* Initialize LCD */
   LCD_Baslat(&hi2c1);
   LCD_Temizle(&hi2c1);
 
   while (1)
   {
-    /* 1. Sample Analog Input from Potentiometer via ADC1 */
+    /* 1. Read Potentiometer via ADC1 */
     HAL_ADC_Start(&hadc1);
     if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK)
     {
@@ -186,19 +196,19 @@ int main(void)
     }
     HAL_ADC_Stop(&hadc1);
 
-    /* 2. Split Floating Point Voltage into Integer and Fraction */
+    /* 2. Format Float to Integer/Fraction */
     int v_tam = (int)voltaj_degeri;
     int v_ondalik = (int)((voltaj_degeri - v_tam) * 100);
 
-    /* 3. Format Display Text Buffers */
+    /* 3. Format Buffers */
     sprintf(satir1_yazi, "ADC : %-4d", adc_degeri);
     sprintf(satir2_yazi, "VOLT: %d.%02d V", v_tam, v_ondalik);
 
-    /* 4. Render Line 1 */
+    /* 4. Display on Line 1 */
     LCD_Konum_Ayarla(&hi2c1, 0, 0);
     LCD_Metin_Yaz(&hi2c1, satir1_yazi);
 
-    /* 5. Render Line 2 */
+    /* 5. Display on Line 2 */
     LCD_Konum_Ayarla(&hi2c1, 1, 0);
     LCD_Metin_Yaz(&hi2c1, satir2_yazi);
 
