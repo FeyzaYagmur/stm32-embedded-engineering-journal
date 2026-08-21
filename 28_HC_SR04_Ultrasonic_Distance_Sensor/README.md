@@ -2,19 +2,19 @@
 
 This project implements physical distance measurement using the **HC-SR04 Ultrasonic Ranging Module** interfaced with an STM32 microcontroller. The firmware features a custom software-based microsecond delay routine (`delayUS`), a modular driver function (`HCSR04_Read()`), and acoustic wave time-to-distance conversion ($Distance = \frac{Time}{58.0}$) with upper/lower out-of-range safety filtering ($2\text{cm} - 400\text{cm}$).
 
-## ⚙️ Hardware & Configuration
+##   Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **Sensor Component:** HC-SR04 Ultrasonic Ranging Sensor
 - **Active Pins:** `PA1` (Trig Output Pin), `PA0` (Echo Input Pin)
 - **Timing:** Software `__NOP()` Assembly Cycle-Based Microsecond Delay (`delayUS`)
 - **Conversion Equation:** $Distance_{\text{cm}} = \frac{Echo_{\text{us}}}{58.0}$
 
-## 🔍 Key Concepts Covered
+##   Key Concepts Covered
 - **Software Microsecond Delay (`delayUS`):** Implementing calibrated microsecond delays using CPU instruction cycles (`__NOP()`) based on clock frequency.
 - **Modular Driver Architecture:** Encapsulating trigger pulsing, echo high-state polling, and math conversion inside an isolated driver routine (`HCSR04_Read()`).
 - **Out-of-Range Bound Filtering:** Clamping valid measurement windows between $2.0\text{cm}$ and $400.0\text{cm}$ to reject erroneous acoustic readings.
 
-## 💻 Complete Source Code (`main.c` / Defterdeki Yapı ile Birebir)
+##   Complete Source Code (`main.c` / Defterdeki Yapı ile Birebir)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
