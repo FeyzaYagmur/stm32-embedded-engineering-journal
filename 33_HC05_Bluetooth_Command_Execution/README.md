@@ -1,3 +1,28 @@
+# HC-05 Bluetooth Multi-Channel Command Control & Error Feedback System
+
+> **Hardware & Setup Note:** This project demonstrates UART/USART communication protocol logic using STM32 HAL libraries. Although the curriculum demonstrates data transmission via an HC-05 Bluetooth module, the underlying protocol remains standard UART. Therefore, physical hardware verification was successfully conducted using a USB-to-TTL converter connected directly to the STM32 USART TX/RX pins, communicating with a PC serial terminal (Termite).
+
+This project demonstrates bidirectional serial hardware actuation using an STM32 microcontroller. The firmware receives single-byte ASCII command frames over USART1, independently manages multi-channel GPIO outputs (`PB0` and `PB1`), and provides dynamic error status telemetry (`Yanlis Girdiniz\r\n`) upon receiving unmapped instructions.
+
+## ⚙️ Hardware & Configuration
+- **MCU:** STM32F407VGT6 (ARM Cortex-M4)
+- **Serial Interface:** USB-to-TTL Converter (CP2102 / CH340) / HC-05 Bluetooth SPP
+- **Peripheral:** USART1 (115200 bps, 8 Data Bits, 1 Stop Bit, No Parity - 8N1)
+- **Active Pins:** 
+  - `PA10` (USART1_RX), `PA9` (USART1_TX)
+  - `PB0` (Output Channel 1 - LED 1)
+  - `PB1` (Output Channel 2 - LED 2)
+- **Host Terminal:** Termite 3.4 Serial Monitor
+- **Method:** Polling Reception with Return Status Validation (`HAL_UART_Receive`)
+
+## 🔍 Key Concepts Covered
+- **Multi-Channel Actuation:** Parsing discrete command bytes (`'0'`, `'1'`, `'2'`, `'3'`) to control independent output lines.
+- **Wireless Error Handling & Telemetry:** Catching invalid command inputs in an `else` branch and transmitting formatted error feedback over UART.
+- **State Validation:** Ensuring robust frame reception through `HAL_OK` status checks before processing buffer payloads.
+
+## 💻 Complete Source Code (`main.c` & Init)
+
+```c
 #include "main.h"
 #include <string.h>
 
