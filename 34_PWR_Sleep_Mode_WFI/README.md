@@ -2,19 +2,19 @@
 
 This project demonstrates the fundamental implementation of microcontroller power management by placing the STM32 ARM Cortex-M4 core into **Sleep Mode**. Using the `WFI` (Wait For Interrupt) instruction architecture via HAL libraries, the main execution thread is suspended to save power. A hardware timer (TIM3) is configured to generate periodic interrupts, acting as a wake-up source to temporarily resume core operations, toggle a status LED inside the callback, and immediately return to sleep.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **Power Mode:** Sleep Mode (`PWR_MAINREGULATOR_ON`)
 - **Wake-Up Source:** TIM3 Hardware Interrupt (Period Elapsed)
 - **Active Pins:** `PD12` (Onboard Green LED)
 - **Method:** Core Suspension via `HAL_PWR_EnterSLEEPMode()` and `WFI` Instruction
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **Low-Power State Execution:** Halting the core CPU clock while keeping peripheral clocks (like TIM3 and GPIO) active to significantly reduce power consumption without completely shutting down the system.
 - **Wait For Interrupt (WFI):** Utilizing the ARM Cortex instruction set to suspend the main `while(1)` loop. The MCU remains idle until a hardware interrupt request (IRQ) is detected.
 - **Asynchronous ISR Wake-Up:** Handling the timer interrupt inside `HAL_TIM_PeriodElapsedCallback()`. Once the ISR finishes execution, the core returns to the `while(1)` loop and immediately re-enters sleep mode.
 
-## 💻 Complete Source Code (`main.c` / Defterdeki Yapı ile Birebir)
+##  Complete Source Code (`main.c` / Defterdeki Yapı ile Birebir)
 
 Below is the complete C implementation demonstrating the power management logic and interrupt callback routines:
 
