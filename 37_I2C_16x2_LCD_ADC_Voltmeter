@@ -27,10 +27,10 @@ This project implements a modular hardware driver for a 16x2 HD44780-compatible 
 
 
 
-
-// 1. Header File (`Core/Inc/i2c_lcd16x2.h`)
-
 ```c
+// 1. Header File (`Core/Inc/i2c_lcd16x2.h`)
+```
+
 #ifndef INC_I2C_LCD16X2_H_
 #define INC_I2C_LCD16X2_H_
 
