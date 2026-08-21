@@ -1,24 +1,3 @@
-# HC-05 Bluetooth Wireless Multi-Channel Command Control & Error Feedback
-
-This project demonstrates bi-directional wireless hardware control using the **HC-05 Bluetooth TTL Transceiver Module** interfaced with an STM32 microcontroller. The firmware receives ASCII single-byte control frames wirelessly over USART, parses multi-channel output requests (`PB0` and `PB1` pins), and responds with error status feedback (`"Yanlis Girdiniz\r\n"`) upon receiving invalid commands.
-
-## ⚙️ Hardware & Configuration
-- **MCU:** STM32F407VGT6 (ARM Cortex-M4)
-- **Wireless Peripheral:** HC-05 Bluetooth 2.0 Module (TTL SPP)
-- **Peripherals Used:** USART1 / USART2, GPIOB Output Drivers
-- **Active Pins:** `PA10` (USART1_RX), `PB0` (Output Channel 1), `PB1` (Output Channel 2)
-- **Method:** Blocking Multi-State Command Parsing via `HAL_UART_Receive()`
-
-## 🔍 Key Concepts Covered
-- **Multi-Channel Wireless Actuation:** Processing individual byte directives (`'0'`, `'1'`, `'2'`, `'3'`) to manipulate discrete GPIO output pins (`PB0` / `PB1`) independently.
-- **Wireless Error Handling & Telemetry Feedback:** Trapping invalid user terminal inputs inside an `else` condition and returning diagnostic feedback strings over Bluetooth.
-- **Status Machine Execution:** Integrating `HAL_OK` return status verification on `HAL_UART_Receive` to ensure reliable payload processing.
-
-## 💻 Complete Source Code (`main.c` / Defterdeki Receive Kodu ile Birebir)
-
-Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
-
-```c
 #include "main.h"
 #include <string.h>
 
