@@ -84,7 +84,7 @@ int main(void)
     else if (rxData == '0')
     {
       HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, GPIO_PIN_RESET);
-      HAL_UART_Transmit(&huart2, (uint8_t *)"Led Sondo\r\n", 11, 1000);
+      HAL_UART_Transmit(&huart2, (uint8_t *)"Led Sondu\r\n", 11, 1000);
     }
 
     /* USER CODE END WHILE */
