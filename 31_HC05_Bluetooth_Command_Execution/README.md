@@ -4,7 +4,7 @@
 
 This project demonstrates bidirectional serial hardware actuation using an STM32 microcontroller. The firmware receives single-byte ASCII command frames over USART1, independently manages multi-channel GPIO outputs (`PB0` and `PB1`), and provides dynamic error status telemetry (`Yanlis Girdiniz\r\n`) upon receiving unmapped instructions.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **Serial Interface:** USB-to-TTL Converter (CP2102 / CH340) / HC-05 Bluetooth SPP
 - **Peripheral:** USART1 (115200 bps, 8 Data Bits, 1 Stop Bit, No Parity - 8N1)
@@ -15,12 +15,12 @@ This project demonstrates bidirectional serial hardware actuation using an STM32
 - **Host Terminal:** Termite 3.4 Serial Monitor
 - **Method:** Polling Reception with Return Status Validation (`HAL_UART_Receive`)
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **Multi-Channel Actuation:** Parsing discrete command bytes (`'0'`, `'1'`, `'2'`, `'3'`) to control independent output lines.
 - **Wireless Error Handling & Telemetry:** Catching invalid command inputs in an `else` branch and transmitting formatted error feedback over UART.
 - **State Validation:** Ensuring robust frame reception through `HAL_OK` status checks before processing buffer payloads.
 
-## 💻 Complete Source Code (`main.c` & Init)
+##  Complete Source Code (`main.c` & Init)
 
 ```c
 #include "main.h"
