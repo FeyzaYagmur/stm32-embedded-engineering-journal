@@ -2,7 +2,7 @@
 
 This project demonstrates wireless serial data transmission using the **HC-05 Bluetooth TTL Transceiver Module** interfaced with an STM32 microcontroller via USART peripheral. The firmware transmits structured wireless telemetry strings (`"TTL uzerinden veri aktariliyor\r\n"`) to a paired host Bluetooth terminal (Termite / Mobile Terminal) using polling-based HAL UART routines.
 
-## ⚙️ Hardware & Configuration
+##  Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **Wireless Component:** HC-05 Bluetooth 2.0 SPP Transceiver (TTL Level)
 - **Peripheral Used:** USART1 / USART2 (Asynchronous Mode)
@@ -10,12 +10,12 @@ This project demonstrates wireless serial data transmission using the **HC-05 Bl
 - **Active Pins:** `PA9` (USART1_TX / Bluetooth RX Connection)
 - **Method:** Wireless Transmit Loop via `HAL_UART_Transmit()`
 
-## 🔍 Key Concepts Covered
+##  Key Concepts Covered
 - **Wireless Serial Pass-Through (TTL):** Utilizing the transparent SPP (Serial Port Profile) of HC-05 to bridge microcontroller USART pins wirelessly with host terminals.
 - **UART Buffer Precision:** Applying `sizeof(testMesaji) - 1` and explicit type casting `(uint8_t*)` to transmit exact string boundaries without sending trailing null bytes (`\0`).
 - **Telemetry Streaming:** Establishing periodic ($1000\text{ms}$) wireless telemetry reporting for remote monitoring applications.
 
-## 💻 Complete Source Code (`main.c` / Defterdeki Transmit Kodu ile Birebir)
+##  Complete Source Code (`main.c` / Defterdeki Transmit Kodu ile Birebir)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
