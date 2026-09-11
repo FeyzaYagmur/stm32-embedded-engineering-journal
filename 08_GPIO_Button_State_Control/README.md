@@ -14,7 +14,7 @@ This project implements a continuous level-triggered sequential LED pattern gene
 - **Sequential Step Pattern Generation:** Step-by-step activation of multi-channel GPIO outputs in a circular loop structure (`0 -> 1 -> 2 -> 3 -> 0`).
 - **Timing Gated Output Transitions:** Controlling step pattern transition speeds using delay intervals (`HAL_Delay(300)`) inside active polling loops.
 
-## 💻 Complete Source Code (`main.c` / Videodaki Çalışmaya Birebir Uygun)
+## 💻 Complete Source Code (`main.c`)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
