@@ -14,7 +14,7 @@ This project implements advanced power optimization using the STM32 ARM Cortex-M
 - **External Interrupt (EXTI) Wake-Up:** Harnessing hardware edge triggers on EXTI line 0 (`PA0`) to instantly transition the MCU from deep sleep to active running state.
 - **Clock Re-initialization Handling:** Calling `SystemClock_Config()` immediately after exiting Stop Mode to restore system clock frequency (168MHz) before executing user code, as the MCU defaults to internal HSI oscillator upon wake-up.
 
-##  Complete Source Code (`main.c` / Videodaki Yapı ile Birebir)
+##  Complete Source Code (`main.c`)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
