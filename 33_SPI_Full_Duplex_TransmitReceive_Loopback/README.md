@@ -14,7 +14,7 @@ This project demonstrates full-duplex serial communication using the **Serial Pe
 - **Hardware Loopback Bus Verification:** Directing MOSI output signals physically back into MISO input pins to test driver stack reliability without external slave chips.
 - **Payload Validation & GPIO Toggling:** Comparing received SPI byte buffers (`gelenVeri == 0x55`) to drive conditional LED outputs (`PD12`).
 
-##  Complete Source Code (`main.c` / Videodaki Kod ile Birebir)
+##  Complete Source Code (`main.c`)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
