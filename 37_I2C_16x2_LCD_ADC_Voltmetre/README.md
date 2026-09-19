@@ -2,7 +2,7 @@
 
 This project implements a modular hardware driver for a 16x2 HD44780-compatible character LCD interfaced via a PCF8574 I2C backpack on an STM32 microcontroller. The firmware periodically samples analog voltage from an external potentiometer using the 12-bit Analog-to-Digital Converter (ADC1 Channel 1), converts the raw reading into real-world voltage ($0.0\text{V} - 3.3\text{V}$), formats the values, and streams real-time telemetry updates to the two-line display over I2C1.
 
-## ⚙️ Hardware & Configuration
+## ⚙️   Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4)
 - **Display Component:** 16x2 Character LCD with PCF8574 I2C Backpack
 - **Analog Input:** 10kΩ Potentiometer
@@ -15,7 +15,7 @@ This project implements a modular hardware driver for a 16x2 HD44780-compatible 
   - `PA1` (ADC1_IN1)
 - **Method:** 4-Bit Nibble-Shifted I2C Command/Data Packaging with Polling ADC Conversion
 
-## 🔍 Key Concepts Covered
+##   🔍 Key Concepts Covered
 - **Modular Hardware Driver Design:** Splitting display control into distinct header (`i2c_lcd16x2.h`), driver source (`i2c_lcd16x2.c`), and application (`main.c`) modules.
 - **PCF8574 I2C 4-Bit Protocol Packaging:** Deconstructing 8-bit LCD instructions into high and low 4-bit nibbles with Enable (`EN`) pulsing and Register Select (`RS`) framing over I2C.
 - **Analog-to-Digital Conversion & Calibration:** Polling 12-bit ADC data ($0 - 4095$) and computing real analog potential via linear voltage scaling ($V = \frac{\text{ADC}}{4095} \times 3.3\text{V}$).
@@ -23,7 +23,7 @@ This project implements a modular hardware driver for a 16x2 HD44780-compatible 
 
 ---
 
-## 💻 Complete Production Source Code
+##   💻 Complete Production Source Code
 
 ```c
 /* ==============================================================================
