@@ -35,21 +35,25 @@ Physical hardware execution recordings, oscilloscope/multimeter verification cap
 * **Stepper Motor Actuation:** Step-angle driving and sequencing using the ULN2003AN Darlington array.
 * **Seven-Segment Displays:** Direct multiplexing and driving of dual seven-segment display units.
 
-### 🔹 Sensors & Wireless Telemetry
-* **HC-SR04 Ultrasonic Sensor:** Pulse-width timing capture for distance measurement and dynamic proximity threshold gating.
-* **HC-05 Bluetooth Module:** Wireless UART serial telemetry streaming and remote command-based hardware control.
+### 🔹 UART / USART Serial Communication
+* **UART Data Transmission:** Asynchronous serial character and string streaming to host terminal.
+* **UART Interrupt Reception:** Non-blocking serial command processing via RX Interrupts for dynamic actuator/LED control.
 
-### 🔹 Industrial Serial Communication Protocols
-* **UART / USART:** Asynchronous serial data streaming, framing, and interrupt-driven (RX Interrupt) command processing.
-* **I2C Protocol:**
-  * SSD1306 OLED display driver integration.
-  * Modular driver implementation for 16x2 HD44780 Character LCD via PCF8574 I2C backpack and real-time ADC voltmeter dashboard.
-* **SPI Protocol:** Full-Duplex synchronous data transmission/reception and loopback verification.
+### 🔹 Sensors & Wireless Telemetry
+* **HC-SR04 Ultrasonic Sensor:** Timer-based pulse-width capture for precise distance measurement and dynamic proximity threshold gating.
+* **HC-05 Bluetooth Module:** Wireless serial command transmission and remote hardware state execution.
+
+### 🔹 I2C Bus Architecture & Displays
+* **SSD1306 OLED Display:** Graphic and text rendering over the I2C bus.
+* **16x2 Character LCD & ADC Voltmeter:** Modular driver design for HD44780 LCD via PCF8574 I2C backpack, displaying real-time ADC voltage measurements.
+
+### 🔹 SPI Serial Peripheral Interface
+* **SPI Full-Duplex Transmission:** Synchronous full-duplex data streaming and looped-back line verification.
 
 ### 🔹 Power Control & Low-Power Modes (PWR)
 * **Sleep Mode (WFI):** Processor core clock gating using Wait-For-Interrupt to minimize dynamic power dissipation.
 * **Stop Mode (EXTI):** Halting high-speed clocks and core execution with asynchronous external interrupt wake-up.
-* **Standby Mode & Backup Registers:** Deepest power-down mode and data preservation across power loss using Backup Data Registers (BKP).
+* **Standby Mode & Backup Registers:** Deepest power-down mode and non-volatile data preservation across resets using Backup Registers (BKP).
 
 ---
 
