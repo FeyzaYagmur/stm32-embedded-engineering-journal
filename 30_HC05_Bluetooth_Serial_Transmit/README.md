@@ -15,7 +15,7 @@ This project demonstrates wireless serial data transmission using the **HC-05 Bl
 - **UART Buffer Precision:** Applying `sizeof(testMesaji) - 1` and explicit type casting `(uint8_t*)` to transmit exact string boundaries without sending trailing null bytes (`\0`).
 - **Telemetry Streaming:** Establishing periodic ($1000\text{ms}$) wireless telemetry reporting for remote monitoring applications.
 
-##  Complete Source Code (`main.c` / Defterdeki Transmit Kodu ile Birebir)
+##  Complete Source Code (`main.c`)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
