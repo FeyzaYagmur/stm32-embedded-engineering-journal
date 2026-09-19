@@ -2,7 +2,7 @@
 
 This project implements a modular SPI loopback driver on an STM32 microcontroller using the Serial Peripheral Interface 1 (SPI1) peripheral. The driver abstracts full-duplex hardware verification routines (`HAL_SPI_TransmitReceive()`), enabling single-byte testing and multi-byte buffer comparison (`memcmp()`) across physical MOSI-to-MISO loopback jumpers with onboard status LED feedback (`PD12`).
 
-## ⚙️ Hardware & Configuration
+## ⚙️   Hardware & Configuration
 - **MCU:** STM32F407VGT6 (ARM Cortex-M4 Core)
 - **Peripheral:** SPI1 (Full-Duplex Master Mode, 8-Bit Data Frame)
 - **Active Pins:** 
@@ -13,14 +13,14 @@ This project implements a modular SPI loopback driver on an STM32 microcontrolle
 - **Hardware Setup:** Single Jumper Loopback bridging `PA6` (MISO) and `PA7` (MOSI)
 - **Verification Method:** Physical LED Indicator & Live Expressions Watch (`gelenVeri = 0x55 / 85`)
 
-## 🔍 Key Concepts Covered
+## 🔍   Key Concepts Covered
 - **Modular Driver Architecture:** Encapsulating peripheral handles and output indicators within a custom C structure (`SPI_Loopback_t`).
 - **Synchronous Full-Duplex Clocking:** Simultaneously transmitting from MOSI while latching bytes from MISO on SCK edge transitions.
 - **Payload Integrity Validation:** Comparing captured frame buffers against source payloads to verify hardware integrity before driving GPIO states.
 
 ---
 
-## 💻 Complete Production Source Code
+## 💻   Complete Production Source Code
 
 ```c
 /* ==============================================================================
