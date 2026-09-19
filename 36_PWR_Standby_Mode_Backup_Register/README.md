@@ -14,7 +14,7 @@ This project demonstrates ultra-low-power embedded architecture using the STM32 
 - **RTC Backup Domain (BDR) Persistence:** Utilizing battery-backed register blocks (`HAL_RTCEx_BKUPRead` / `HAL_RTCEx_BKUPWrite`) to retain critical system parameters across CPU power-down and system reset cycles.
 - **Hardware WakeUp Pin Triggering:** Configuring dedicated silicon wakeup lines (`HAL_PWR_EnableWakeUpPin`) to trigger cold-start processor resets directly out of deep sleep modes.
 
-##  Complete Source Code (`main.c` / Videodaki Yapı ile Birebir)
+##  Complete Source Code (`main.c`)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
