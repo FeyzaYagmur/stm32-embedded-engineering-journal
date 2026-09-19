@@ -14,7 +14,7 @@ This project implements a proximity threshold control system using an **HC-SR04 
 - **Closed-Loop Threshold Decision Logic:** Comparing dynamic floating-point distance measurements against hardcoded boundary conditions ($5.0\text{cm}$) to toggle digital output states (`GPIO_PIN_SET` / `GPIO_PIN_RESET`).
 - **Modular Software Microsecond Timing:** Utilizing assembly instruction cycle routines (`__NOP()`) inside `delayUS()` to maintain precise $10\mu\text{s}$ trigger pulses without extra hardware timers.
 
-##  Complete Source Code (`main.c` / Defterdeki Yapı ile Birebir)
+##  Complete Source Code (`main.c`)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
