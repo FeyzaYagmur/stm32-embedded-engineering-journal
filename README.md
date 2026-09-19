@@ -1,4 +1,4 @@
-# 🚀 STM32F407 Embedded Systems Engineering Journal
+#  🚀  STM32F407 Embedded Systems Engineering Journal
 
 This repository serves as a personal engineering journal documenting practical embedded firmware implementations developed on the **STM32F407VG Discovery Board** using **STM32CubeIDE** and the **STM32Cube HAL** library.
 
@@ -6,7 +6,7 @@ It encompasses **38 modular laboratory modules**, bridging low-level GPIO operat
 
 ---
 
-## 📺 Hardware Demonstrations & Video Archive
+##  📺 Hardware Demonstrations & Video Archive
 
 Physical hardware execution recordings, oscilloscope/multimeter verification captures, and circuit setups for all modules are documented in the Google Drive archive:  
 🔗 **[Click Here to Access STM32 Project Videos Archive](https://drive.google.com/drive/folders/1QEF27VpM2UhSrB0GhmENcJqSesYxxM8_?usp=sharing)**
