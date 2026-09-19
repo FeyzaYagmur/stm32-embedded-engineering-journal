@@ -14,7 +14,7 @@ This project implements physical distance measurement using the **HC-SR04 Ultras
 - **Modular Driver Architecture:** Encapsulating trigger pulsing, echo high-state polling, and math conversion inside an isolated driver routine (`HCSR04_Read()`).
 - **Out-of-Range Bound Filtering:** Clamping valid measurement windows between $2.0\text{cm}$ and $400.0\text{cm}$ to reject erroneous acoustic readings.
 
-##   Complete Source Code (`main.c` / Defterdeki Yapı ile Birebir)
+##   Complete Source Code (`main.c`)
 
 Below is the complete C implementation written in STM32CubeIDE using native HAL drivers:
 
