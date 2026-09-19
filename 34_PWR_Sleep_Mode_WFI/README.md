@@ -14,7 +14,7 @@ This project demonstrates the fundamental implementation of microcontroller powe
 - **Wait For Interrupt (WFI):** Utilizing the ARM Cortex instruction set to suspend the main `while(1)` loop. The MCU remains idle until a hardware interrupt request (IRQ) is detected.
 - **Asynchronous ISR Wake-Up:** Handling the timer interrupt inside `HAL_TIM_PeriodElapsedCallback()`. Once the ISR finishes execution, the core returns to the `while(1)` loop and immediately re-enters sleep mode.
 
-##  Complete Source Code (`main.c` / Defterdeki Yapı ile Birebir)
+##  Complete Source Code (`main.c`)
 
 Below is the complete C implementation demonstrating the power management logic and interrupt callback routines:
 
